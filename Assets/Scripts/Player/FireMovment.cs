@@ -11,7 +11,7 @@ public class FireMovment : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D trigger)
     {
-        if (trigger.gameObject.tag != "Player")
+        if (trigger.gameObject.tag != "Player" && trigger.gameObject.tag != "Room")
         {
             Destroy(gameObject);
         }

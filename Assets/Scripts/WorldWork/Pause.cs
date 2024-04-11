@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Pause : MonoBehaviour
 {
-    [SerializeField] private GameObject _pauseText;
+    [SerializeField] private GameObject _pauseWindow;
 
     private bool _activePause;
     private void Awake()
@@ -13,10 +13,10 @@ public class Pause : MonoBehaviour
     }
     private void Update()
     {
-       if(Input.GetKeyDown(KeyCode.LeftShift)) 
+       if(Input.GetKeyDown(KeyCode.Escape)) 
             SwitchPause();
 
-        _pauseText.SetActive(_activePause);
+        _pauseWindow.SetActive(_activePause);
 
        if (_activePause || FindObjectOfType<GameOverScreenCs>()._isDead)
             Time.timeScale = 0f;
@@ -27,5 +27,13 @@ public class Pause : MonoBehaviour
     private void SwitchPause()
     {
         _activePause = !_activePause;
+    }
+    public void ActivePause()
+    {
+        _activePause = true;
+    }
+    public void OffPause()
+    {
+        _activePause = false;
     }
 }

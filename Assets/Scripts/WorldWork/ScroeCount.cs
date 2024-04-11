@@ -9,16 +9,8 @@ public class ScroeCount : MonoBehaviour
     public static ScroeCount instance;
 
     [SerializeField] private Text _scoreText;
-    [SerializeField] private Text _timeText;
-
-    [HideInInspector] public int Score = 0;
-
-    protected float _timeScondF;
-    private int _minuteTime = 0;
-    private int _secondTime = 0;
-
-    protected string _inputScoreText;
-    protected string _inputTimeText;
+    [SerializeField] private Text _levelText;
+    [SerializeField] private GameObject[] _healthPointImg;
 
     private void Awake()
     {
@@ -27,23 +19,32 @@ public class ScroeCount : MonoBehaviour
     }
     private void Update()
     {
-        _inputScoreText = "Score: " + Score;
-        _scoreText.text = _inputScoreText;
+        _scoreText.text = "Score: " + PlayersScores.SoulsPoint;
+        _levelText.text = "Level: " + FindObjectOfType<PlayersScores>().Levels;
 
-        _timeScondF += Time.deltaTime;
-        if (_timeScondF >= 3f)
-        { 
-            _secondTime++;
-            _timeScondF = 0;
-        }
-
-        if( _secondTime >= 60 )
+        switch (PlayersScores.Instance.HeathPoint)
         {
-            ++_minuteTime;
-            _secondTime = 0;
+            default:
+                for(int i=0; i<_healthPointImg.Length; i++)
+                {
+                    _healthPointImg[i].SetActive(false);
+                }
+                break;
+            case 1:
+                _healthPointImg[0].SetActive(true);
+                _healthPointImg[1].SetActive(false);
+                _healthPointImg[2].SetActive(false);
+                break;
+            case 2:
+                _healthPointImg[0].SetActive(true);
+                _healthPointImg[1].SetActive(true);
+                _healthPointImg[2].SetActive(false);
+                break;
+            case 3:
+                _healthPointImg[0].SetActive(true);
+                _healthPointImg[1].SetActive(true);
+                _healthPointImg[2].SetActive(true);
+                break;
         }
-
-        _inputTimeText = _minuteTime.ToString() + ":" + _secondTime.ToString();
-        _timeText.text = _inputTimeText;
     }
 }

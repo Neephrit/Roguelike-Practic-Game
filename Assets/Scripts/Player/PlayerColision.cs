@@ -8,7 +8,15 @@ public class PlayerColision : MonoBehaviour
     {
         if(collision.gameObject.tag == "Enimy")
         {
-            FindObjectOfType<GameOverScreenCs>().Dead();
+            FindObjectOfType<PlayersScores>().RemoveHealthPoints(1);
+        }
+        
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Finish")
+        {
+            FindObjectOfType<GameOverScreenCs>().NextLvl();
         }
     }
 }

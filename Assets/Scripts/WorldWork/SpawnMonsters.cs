@@ -4,21 +4,15 @@ using UnityEngine;
 
 public class SpawnMonsters : MonoBehaviour
 {
-    [SerializeField] GameObject monster;
-    [SerializeField] private float _startCoolDown;
-    private float _coolDown;
+    [SerializeField] GameObject[] monster;
+
     private void Awake()
     {
-        _coolDown = _startCoolDown;
+        int monsterID = Random.Range(0, monster.Length);
+        Spawn(monsterID);
     }
-    private void Update()
+    public void Spawn(int monsterID)
     {
-        if(_coolDown > 0)
-            _coolDown -= Time.deltaTime;
-        else
-        {
-            Instantiate(monster,transform.position, Quaternion.identity);
-            _coolDown = _startCoolDown;
-        }
-    }
+        Instantiate(monster[monsterID], transform.position, Quaternion.identity);
+    }    
 }

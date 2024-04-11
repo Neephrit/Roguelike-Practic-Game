@@ -2,8 +2,10 @@ using UnityEngine;
 
 public class EnimyFolow : MonoBehaviour
 {
-    [SerializeField] private Transform _playerPosition;
+    private Transform _playerPosition;
+
     [SerializeField] private float _speed;
+    [SerializeField] private RoomWork _currentRoom;
 
     private void Awake()
     {
@@ -19,7 +21,8 @@ public class EnimyFolow : MonoBehaviour
         if(trigger.gameObject.tag=="Fire")
         {
             Destroy(gameObject);
-            ++ScroeCount.instance.Score;
+            FindObjectOfType<PlayersScores>().AddScore();
+            _currentRoom.RemEnimy();
         }
     }
 }

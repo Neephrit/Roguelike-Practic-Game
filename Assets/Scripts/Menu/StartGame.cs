@@ -5,11 +5,27 @@ using UnityEngine.SceneManagement;
 
 public class StartGame : MonoBehaviour
 {
+    [SerializeField] private GameObject RecordWindow;
+    [SerializeField] private GameObject HelpWindow;
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
             Application.Quit();
-        else if (Input.GetKeyDown(KeyCode.Space))
-            SceneManager.LoadScene(1);
+    }
+    public void SetStartGame()
+    {
+        SceneManager.LoadScene(1);
+    }
+    public void CloseGame()
+    {
+        Application.Quit();
+    }
+    public void WindowOfRecords(bool state)
+    {
+        RecordWindow.SetActive(state);
+    }
+    public void WindowOfHelp(bool state)
+    {
+        HelpWindow.SetActive(state);
     }
 }

@@ -4,14 +4,15 @@ using UnityEngine;
 
 public class Shooting : MonoBehaviour
 {
+    public static Shooting instance;
     [SerializeField] private GameObject _fireBall;
 
-    private void Update()
+    private void Awake()
     {
-        if (Input.GetKeyDown(KeyCode.K)) //поменять на inputAxis
-            Shoot();
+        if(instance == null)
+            instance = this;
     }
-    private void Shoot()
+    public void Shoot()
     {
         Instantiate(_fireBall,transform.position,transform.rotation);
     }

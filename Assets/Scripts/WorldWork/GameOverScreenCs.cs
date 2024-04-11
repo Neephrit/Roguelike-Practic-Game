@@ -7,6 +7,7 @@ public class GameOverScreenCs : MonoBehaviour
 {
     public bool _isDead;
     [SerializeField] private GameObject Panel;
+    [SerializeField] private ScoreManager scoreManager;
 
     private void Awake()
     {
@@ -16,6 +17,7 @@ public class GameOverScreenCs : MonoBehaviour
     public void Dead()
     {
         _isDead = true;
+        
     }
 
     private void Update()
@@ -27,11 +29,23 @@ public class GameOverScreenCs : MonoBehaviour
             SceneManager.LoadScene(1);
             Time.timeScale = 1f;
         }
+    }
 
-        if(Input.GetKeyDown(KeyCode.Escape))
-        {
-            SceneManager.LoadScene(0);
-            Time.timeScale = 1f;
-        }
+    public void Restart()
+    {
+        PlayerPrefs.SetInt("Souls", 0);
+        SceneManager.LoadScene(1);
+        Time.timeScale = 1f;
+    }
+    public void ToMenu()
+    {
+        SceneManager.LoadScene(0);
+        Time.timeScale = 1f;
+    }
+    public void NextLvl()
+    {
+        PlayersScores.Instance.SaveScore();
+        SceneManager.LoadScene(2);
+        Time.timeScale = 1f;
     }
 }
